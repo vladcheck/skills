@@ -1,7 +1,10 @@
 ---
-title: opsx-spec-validate
+name: opsx-spec-validate
 description: Use when you need to validate if your openspec artifacts violate any specs defined by openspec.
 license: MIT
+user-invocable: true
+metadata:
+  deprecated: no
 tools: openspec
 ---
 

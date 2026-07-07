@@ -1,7 +1,10 @@
 ---
-title: solid
+name: solid
 description: Use when you need to check if a class or family of classes follows S.O.L.I.D. principles
 license: MIT
+user-invocable: true
+metadata:
+  deprecated: no
 ---
 
 ## Principles

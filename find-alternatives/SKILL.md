@@ -1,4 +1,17 @@
-# Find Alternatives
+---
+name: find-alternatives
+description: Use this skill when the user asks to find an alternative to a tool or an equivalent tool but with some key difference provided by user.
+license: MIT
+user-invocable: true
+metadata:
+  deprecated: no
+---
+
+## Goal
+
+Help the user discover, evaluate, and compare tools or products. Provide honest, useful recommendations with clear reasoning.
+
+## When to use
 
 Use this skill when the user asks:
 - "find me a popular and free tool for X that does Y"
@@ -6,12 +19,6 @@ Use this skill when the user asks:
 - "what are the best alternatives to X?"
 - "compare X with other tools"
 - "is there a free alternative to X?"
-
-## Goal
-
-Help the user discover, evaluate, and compare tools or products. Provide honest, useful recommendations with clear reasoning.
-
----
 
 ## Process
 

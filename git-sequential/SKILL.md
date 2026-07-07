@@ -1,6 +1,10 @@
 ---
 name: git-sequential
 description: Use when a pile of uncommitted changes (or one big commit/diff) should become a clean sequence of logical commits — incremental commits, splitting a big change, building a readable history as if the work were done step by step, staging hunks selectively before a PR.
+license: MIT
+user-invocable: true
+metadata:
+  deprecated: no
 ---
 
 # git-sequential
@@ -24,7 +28,7 @@ Skip for trivial single-purpose changes — one commit is correct.
    - Selected hunks: `git add -p` (`y`/`n` per hunk, `s` to split, `e` to hand-edit a hunk)
    - Surgical splits `-p` can't make: `git add -e` (edit the raw patch)
    - Untracked file you need to split: `git add -N <file>` first (intent-to-add), then `git add -p` can offer its hunks.
-4. **Commit the step** with a message scoped to *just that step*. Repeat 3–4 until `git status` is clean.
+4. **Commit the step** with a message scoped to _just that step_. Repeat 3–4 until `git status` is clean.
 5. **Verify:** `git log --oneline`. To prove every commit builds: `git rebase -i --exec "<test cmd>" <base>` — it stops on the first commit that fails.
 
 ## Splitting an existing single commit
@@ -33,19 +37,20 @@ Skip for trivial single-purpose changes — one commit is correct.
 git reset HEAD~          # keep changes, drop the commit; working tree now dirty
 # ...then run the Workflow above
 ```
+
 Mid-history commit: `git rebase -i <base>`, mark it `edit`, then `git reset HEAD^` and recommit in pieces. Reorder/squash later with the same interactive rebase.
 
 ## Quick reference
 
-| Need | Command |
-|------|---------|
-| Stage hunks interactively | `git add -p` |
-| Split a hunk further | `s` then `e` inside `add -p` |
+| Need                            | Command                               |
+| ------------------------------- | ------------------------------------- |
+| Stage hunks interactively       | `git add -p`                          |
+| Split a hunk further            | `s` then `e` inside `add -p`          |
 | Stage part of an untracked file | `git add -N <file>` then `git add -p` |
-| Hand-edit what gets staged | `git add -e` |
-| Undo last commit, keep changes | `git reset HEAD~` |
-| Reorder / squash / edit history | `git rebase -i <base>` |
-| Assert every commit builds | `git rebase -i --exec "<cmd>" <base>` |
+| Hand-edit what gets staged      | `git add -e`                          |
+| Undo last commit, keep changes  | `git reset HEAD~`                     |
+| Reorder / squash / edit history | `git rebase -i <base>`                |
+| Assert every commit builds      | `git rebase -i --exec "<cmd>" <base>` |
 
 ## Common mistakes
 

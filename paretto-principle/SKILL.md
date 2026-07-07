@@ -2,6 +2,9 @@
 name: paretto-principle
 description: Use when user asks "what are the core concepts of X", wants to learn a domain quickly, asks about essential/fundamental/high-leverage topics, mentions Pareto/80-20/essentials, or needs orientation in an unfamiliar subject area
 license: MIT
+user-invocable: true
+metadata:
+  deprecated: no
 ---
 
 # Pareto Principle Research

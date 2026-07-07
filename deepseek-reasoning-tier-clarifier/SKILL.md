@@ -7,6 +7,8 @@ metadata:
   audience: developers
   domain: ai-agent-orchestration
   triggers: reasoning, thinking-mode, task-complexity, model-selection
+  deprecated: no
+user-invocable: true
 ---
 
 ## What I do
