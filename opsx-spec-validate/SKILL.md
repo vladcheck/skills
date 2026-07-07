@@ -38,11 +38,6 @@ tools: openspec
 - Delta section headers valid: only ## ADDED, ## MODIFIED, ## REMOVED, ## RENAMED
 - No empty delta sections
 
-### Rules for delta specs (lulumber-shared-mock-utils, lulumber-write-test-skill)
-- MODIFIED requirements: headers match main spec headers EXACTLY (read main specs to verify)
-- REMOVED requirements: have Reason and Migration fields
-- Delta specs reference the correct main spec name
-
 ### Cross-artifact consistency
 - Every new capability in proposal.md → has spec file in specs/
 - Every modified capability in proposal.md → has delta spec file in specs/
