@@ -6,6 +6,7 @@
 | :-------------------------------- | -------------- | :--------------: | -------------- |
 | deepseek-reasoning-tier-clarifier | agents         |        No        | DeepSeek       |
 | find-alternatives                 | tooling        |        No        | Any            |
+| git-rebuild-branch                | git            |        No        | Any            |
 | git-sequential                    | git            |        No        | Any            |
 | opsx-spec-validate                | openspec       |        No        | Any            |
 | paretto-principle                 | learning       |        No        | Any            |
