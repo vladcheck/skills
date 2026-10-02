@@ -3,6 +3,14 @@ set -euo pipefail
 
 SKILL_FILE="${1:-SKILL.md}"
 
+if [ -d "$SKILL_FILE" ]; then
+	echo "$SKILL_FILE is a directory."
+	exit 1
+elif ! [ -f "$SKILL_FILE" ]; then
+	echo "$SKILL_FILE does not exist."
+	exit 1
+fi
+
 # Extract YAML frontmatter
 extract_frontmatter() {
   sed -n '/^---$/,/^---$/p' "$SKILL_FILE" | sed '1d;$d'
