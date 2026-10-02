@@ -1,25 +1,28 @@
 ---
 name: deepseek-reasoning-tier-clarifier
-description: Analyze task complexity and recommend DeepSeek reasoning tier (low/medium/high/max). Check conversation context and optional codebase files before suggesting a tier. Use when user asks about reasoning effort or when task scope is ambiguous.
+description: Use when user asks about reasoning effort or when task scope is ambiguous.Analyze task complexity and recommend DeepSeek reasoning tier (low/medium/high/max).
 license: MIT
 compatibility: opencode, deepseek-v4
+version: "1.0.0"
 metadata:
+  author: valdemar_check <valdemarcheck@yandex.ru>
   audience: developers
   domain: ai-agent-orchestration
   triggers: reasoning, thinking-mode, task-complexity, model-selection
+  tags: [utility, guide]
   deprecated: no
 user-invocable: true
 ---
 
-## What I do
+# DeepSeek Reasoning Tier Classifier
+
+## Purpose
 
 - Analyze the current task prompt for complexity signals
 - Check conversation history for related context or prior decisions
 - Optionally inspect referenced codebase files to assess technical scope
 - Map task characteristics to a DeepSeek reasoning tier recommendation
 - Present the recommendation with clear rationale and request confirmation if overriding user preference
-
-## When to use me
 
 Use this skill when:
 - User explicitly asks which reasoning tier to use
@@ -32,7 +35,11 @@ Do NOT use me for:
 - Tasks where user has already confirmed their tier choice
 - Non-DeepSeek model sessions
 
-## How to assess task complexity
+## Requirements
+
+- Any DeepSeek model that supports reasoning tiers is available;
+
+## Instructions
 
 ### Step 1: Gather context
 1. Read the latest user message and identify the core task
@@ -86,14 +93,14 @@ Present your recommendation using this structure:
 - If tier differs: "Your request specified `{{user_tier}}`, but analysis suggests `{{recommended_tier}}`. Switch? (y/n)"
 ```
 
-## Gotchas
+## Limitations
 
 - DeepSeek API does not support dynamic tier switching mid-generation. Any change requires a new API call.
 - `V4 Flash` caps effective thinking tokens at ~12k. Route `high`/`max` tasks to `V4 Pro` if available.
 - User may have cost sensitivity. Always surface the cost/latency tradeoff when recommending a higher tier.
 - If conversation context is sparse, default to `medium` and ask clarifying questions rather than guessing `max`.
 
-## Example workflow
+## Examples
 
 User: "[calls the skill] Write a small bash script to search for files with grep where 'import' appears"
 
@@ -117,3 +124,5 @@ After providing a recommendation:
 2. If user accepts, proceed with the task using the agreed tier
 3. If user rejects, note their choice and proceed with their selected tier
 4. Log the decision in conversation for future reference (helps with pattern learning)
+
+## Troubleshooting
