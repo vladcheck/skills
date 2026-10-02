@@ -3,14 +3,6 @@ set -euo pipefail
 
 SKILL_FILE="${1:-SKILL.md}"
 
-if [ -d "$SKILL_FILE" ]; then
-	echo "$SKILL_FILE is a directory."
-	exit 1
-elif ! [ -f "$SKILL_FILE" ]; then
-	echo "$SKILL_FILE does not exist."
-	exit 1
-fi
-
 # Extract YAML frontmatter
 extract_frontmatter() {
   sed -n '/^---$/,/^---$/p' "$SKILL_FILE" | sed '1d;$d'
@@ -32,8 +24,11 @@ validate_description() {
   local desc
   desc=$(extract_frontmatter | grep "^description:" | sed 's/description: *//' | tr -d '"')
   local len=${#desc}
-  if [ "$len" -lt 1 ] || [ "$len" -gt 1024 ]; then
-    echo "✗ Description length invalid: $len chars (must be 1-1024)"
+	if [ -z "$desc" ]; then
+		echo "✗ Description is empty"
+		return 1
+  elif [ "$len" -lt 1 ] || [ "$len" -gt 150 ]; then
+    echo "✗ Description length invalid: $len chars (must be 1-150)"
     return 1
   fi
   echo "✓ Description valid: $len chars"
@@ -66,10 +61,37 @@ validate_dir_match() {
   fi
 }
 
+run_required_checks() {
+	if ! [ -f "$SKILL_FILE" ]; then
+		echo "✗ $SKILL_FILE does not exist."
+		return 1
+	elif [ -d "$SKILL_FILE" ]; then
+		echo "✗ $SKILL_FILE is a directory."
+		return 1
+	fi
+
+	if ! validate_required; then return 1; fi
+	if ! validate_name; then return 1; fi
+	if ! validate_description; then return 1; fi
+}
+
+run_optional_checks() {
+	if ! validate_dir_match; then return 1; fi
+}
+
 # Run all checks
+echo "------"
 echo "Linting: $SKILL_FILE"
-validate_required || exit 1
-validate_name || exit 1
-validate_description || exit 1
-validate_dir_match
-echo "✓ All checks passed"
+echo "------"
+if run_required_checks; then
+	if run_optional_checks; then
+		echo "------"
+		echo "✓ All checks passed"
+	else
+		echo "------"
+		echo "⚠ Some optional checks failed"
+	fi
+else
+	echo "------"
+	echo "✗ Required checks failed"
+fi
