@@ -1,9 +1,12 @@
 ---
 name: git-sequential
-description: Use when a pile of uncommitted changes (or one big commit/diff) should become a clean sequence of logical commits — incremental commits, splitting a big change, building a readable history as if the work were done step by step, staging hunks selectively before a PR.
+description: Use when a pile of uncommitted changes (or one big commit/diff) should become a clean sequence of logical commits.
 license: MIT
+version: "1.0.0"
 user-invocable: true
 metadata:
+  author: valdemar_check <valdemarcheck@yandex.ru>
+  tags: []
   deprecated: no
 ---
 
@@ -11,7 +14,9 @@ metadata:
 
 Turn one undifferentiated blob of changes into an ordered sequence of small, coherent commits — as if the work had been done incrementally. Goal: a history that reads as a logical progression and (ideally) builds/passes at every step.
 
-## When to use
+## Purpose
+
+You should use this skill when:
 
 - You wrote everything at once but want a reviewable, story-like history.
 - Splitting a big commit or diff before opening a PR.
@@ -58,3 +63,7 @@ Mid-history commit: `git rebase -i <base>`, mark it `edit`, then `git reset HEAD
 - **Forgetting untracked files.** `git add -p` ignores them until `git add -N`. Check `git status` is clean at the end.
 - **Faking a history that never built.** If you care about bisectability, verify with `--exec`. If you don't, say so and skip it.
 - **Rebasing pushed/shared commits** without coordinating — only rewrite history that's still local.
+
+## Troubleshooting
+
+## Limitations
