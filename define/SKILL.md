@@ -1,6 +1,6 @@
 ---
 name: define
-description: Use when you need to provide a rigurous, technical definition, or when user asks explicitly asks you to give a definition of a term.
+description: Use when you need to provide a rigorous, technical definition, or when user asks explicitly asks you to give a definition of a term.
 license: MIT
 version: "1.0.0"
 metadata:
