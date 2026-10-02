@@ -1,3 +1,5 @@
 **/evals/
 reports/
 .DS_Store
+
+.vscode
