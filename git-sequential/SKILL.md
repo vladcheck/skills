@@ -49,7 +49,7 @@ Mid-history commit: `git rebase -i <base>`, mark it `edit`, then `git reset HEAD
 
 | Need                            | Command                               |
 | ------------------------------- | ------------------------------------- |
-| Stage hunks interactively       | `git add -p`                          |
+| Stage hunks interactively  (needs user input)       | `git add -p`                          |
 | Split a hunk further            | `s` then `e` inside `add -p`          |
 | Stage part of an untracked file | `git add -N <file>` then `git add -p` |
 | Hand-edit what gets staged      | `git add -e`                          |
