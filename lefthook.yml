@@ -1,0 +1,6 @@
+pre-commit:
+  jobs:
+    - name: lint-skills
+      run: for f in {staged_files}; do ./lint.sh "$f" || exit 1; done
+      glob:
+        - "**/SKILL.md"
